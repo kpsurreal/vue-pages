@@ -1,5 +1,7 @@
 let pageMethod = require('./util/getPages.js');
 pages = pageMethod.pages();
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
   outputDir: 'dist',
   assetsDir: '',
@@ -7,19 +9,28 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
   ? '/dist/'
   : '/',
+
+  css: {
+    loaderOptions: {
+        postcss: {
+            plugins: [
+                require('postcss-px2rem')({remUnit: 75}), // 换算的基数
+            ]
+        }
+    }
+  },
   chainWebpack: config => {
-    console.log(config)
     config.output
       .set('filename', '[name]/js/[name].js')
       .set('chunkFilename', '[name]/js/[name].js')
 
     config
-      .plugin('MiniCssExtractPlugin')
-      .use(require('mini-css-extract-plugin'), [{
-        filename: "[name].css",
-        chunkFilename: "[id].css"
+      .plugin('extract-css')
+      .use(MiniCssExtractPlugin, [{
+        filename: "[name]/css/[name].css",
+        chunkFilename: "[name]/css/[id].css"
       }])
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.use_analyzer) {
       config
         .plugin('webpack-bundle-analyzer')
         .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
