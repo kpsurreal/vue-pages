@@ -7,6 +7,7 @@
     "build": "vue-cli-service build && node util/jsCopy.js && node util/cssCopy.js && node util/htmlReplace.js",
     "lint": "vue-cli-service lint",
     "test": "vue-cli-service build",
+    "analyz": "npm_config_report=true npm run build",
     "inspect": "vue inspect > webpack.js"
   },
   "dependencies": {
