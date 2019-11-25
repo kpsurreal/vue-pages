@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build && node util/jsCopy.js && node util/cssCopy.js && node util/htmlReplace.js",
     "lint": "vue-cli-service lint",
-    "inspect": "vue inspeck > webpack.js"
+    "test": "vue-cli-service build",
+    "inspect": "vue inspect > webpack.js"
   },
   "dependencies": {
     "core-js": "^3.3.2",
@@ -26,6 +27,7 @@
     "eslint-plugin-vue": "^5.0.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
+    "mini-css-extract-plugin": "^0.8.0",
     "vue-template-compiler": "^2.6.10"
   }
 }

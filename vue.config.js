@@ -8,6 +8,9 @@ module.exports = {
   ? '/dist/'
   : '/',
   chainWebpack: config => {
-
+    console.log(config)
+    config.output
+      .set('filename', '[name]/js/[name].js')
+      .set('chunkFilename', '[name]/js/[name].js')
   }
 }
